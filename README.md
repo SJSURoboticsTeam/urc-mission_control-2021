@@ -9,3 +9,9 @@ npm install
 ```
 npm run serve
 ```
+
+### Enter commands in this order for success
+```
+npm run start-server
+npm run serve
+```
