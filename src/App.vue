@@ -5,6 +5,7 @@
   <!-- <img src="./assets/logo.png" alt="Robotics Logo"> -->
   <SPA :mode="mode"/>
   <div class="module-array">
+    <button @click="onClick">MC Test</button>
     <button @click="onClick">XHR</button>
     <button @click="onClick">Drive</button>
     <button @click="onClick">Power</button>
@@ -26,7 +27,7 @@ export default {
   },
   methods: {
     onClick(e) {
-      this.mode = e.srcElement.innerText
+      this.mode = e.srcElement.innerText.replace(/ /g, '')
       console.log(this.mode)
     }
   }
@@ -40,7 +41,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   padding-top: 60px;
-  height: 100%;
+  height: 80%;
 }
 h1 {
   color: white;

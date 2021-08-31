@@ -1,4 +1,4 @@
-# urc-mission_control-2021
+# Mission Control 2021
 
 ## Project setup
 ```
@@ -9,11 +9,3 @@ npm install
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
