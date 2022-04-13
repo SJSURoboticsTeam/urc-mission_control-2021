@@ -1,5 +1,5 @@
 <template>
-    <form action="/drive" method="post" class="test-form">
+    <form :action="post" method="post" class="test-form">
       <h2>Drive</h2>
       <div class="label-group">
         <label for="is_operational">is_operational</label>
@@ -22,7 +22,15 @@
 </template>
 
 <script>
+import { serverPort } from "../vars.js";
 
+export default {
+  computed: {
+    post() {
+      return serverPort + '/drive';
+    }
+  }
+}
 </script>
 
 <style scoped>
