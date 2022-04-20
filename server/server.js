@@ -9,11 +9,27 @@ console.log(networkInterfaces);
 app.use(express.json({ limit: "2mb", extended: false }));
 app.use(express.urlencoded({ extended: false }));
 
-var driveObject = {
+var driveCommands = {
+  heartbeat_count: 0,
   is_operational: 1,
+  wheel_shift: 0,
   drive_mode: "S",
   speed: 0,
   angle: 0,
+};
+
+var driveStatus = {
+  heartbeat_count: 0,
+  is_operational: 0,
+  wheel_shift: 0,
+  drive_mode: "S",
+  battery: 0,
+  left_wheel_speed: 0,
+  left_wheel_angle: 0,
+  right_wheel_speed: 0,
+  right_wheel_angle: 0,
+  back_wheel_speed: 0,
+  back_wheel_angle: 0,
 };
 
 app.get("/", (req, res) => {
@@ -27,17 +43,32 @@ app.post("/ip", (req, res) => {
 });
 
 app.get("/drive", (req, res) => {
-  console.log(driveObject);
-  res.jsonp(driveObject);
-});
+  driveStatus.is_operational = Number(req.query.is_operational);
+  driveStatus.wheel_shift = Number(req.query.wheel_shift);
+  driveStatus.drive_mode = String(req.query.drive_mode);
+  driveStatus.battery = Number(req.query.battery);
+  driveStatus.left_wheel_speed = Number(req.query.left_wheel_speed);
+  driveStatus.left_wheel_angle = Number(req.query.left_wheel_angle);
+  driveStatus.right_wheel_speed = Number(req.query.right_wheel_speed);
+  driveStatus.right_wheel_angle = Number(req.query.right_wheel_angle);
+  driveStatus.back_wheel_speed = Number(req.query.back_wheel_speed);
+  driveStatus.back_wheel_angle = Number(req.query.back_wheel_angle);
 
-app.post("/drive", (req, res) => {
-  driveObject.is_operational = req.body.is_operational + 0;
-  driveObject.drive_mode = req.body.drive_mode + "";
-  driveObject.speed = req.body.speed + 0;
-  driveObject.angle = req.body.angle + 0;
-  res.json({ driveObject });
-});
+  driveCommands.heartbeat_count = Number(req.query.heartbeat_count);
+  console.log("Query Params: ", req.query);
+  console.log("Returned Commands: ", driveCommands);
+  res.jsonp(driveCommands);
+  });
+
+  // drive.post("/drive", (req, res) => {
+  //   driveCommands.is_operational = req.body.is_operational;
+  //   driveCommands.wheel_shift = req.body.wheel_shift;
+  //   driveCommands.drive_mode = req.body.drive_mode;
+  //   driveCommands.speed = req.body.speed;
+  //   driveCommands.angle = req.body.angle;
+  //   driveCommands.heartbeat_count = 0;
+  //   res.jsonp(driveCommands);
+  // });
 
 app.post("/arm", (req, res) => {
   console.log("arm post!");
