@@ -60,15 +60,15 @@ app.get("/drive", (req, res) => {
   res.jsonp(driveCommands);
   });
 
-  // drive.post("/drive", (req, res) => {
-  //   driveCommands.is_operational = req.body.is_operational;
-  //   driveCommands.wheel_shift = req.body.wheel_shift;
-  //   driveCommands.drive_mode = req.body.drive_mode;
-  //   driveCommands.speed = req.body.speed;
-  //   driveCommands.angle = req.body.angle;
-  //   driveCommands.heartbeat_count = 0;
-  //   res.jsonp(driveCommands);
-  // });
+  drive.post("/drive", (req, res) => {
+    driveCommands.is_operational = req.body.is_operational;
+    driveCommands.wheel_shift = req.body.wheel_shift;
+    driveCommands.drive_mode = req.body.drive_mode;
+    driveCommands.speed = req.body.speed;
+    driveCommands.angle = req.body.angle;
+    driveCommands.heartbeat_count = 0;
+    res.jsonp(driveCommands);
+  });
 
 app.post("/arm", (req, res) => {
   console.log("arm post!");

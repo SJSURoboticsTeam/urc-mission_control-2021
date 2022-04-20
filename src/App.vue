@@ -3,11 +3,11 @@
   <h1>Mission Control 2021</h1>
   <!-- <h1 class="current-mode">{{ mode }}</h1> -->
   <!-- <img src="./assets/logo.png" alt="Robotics Logo"> -->
-  <SPA :mode="mode"/>
+  <SPA :mode="mode" />
   <div class="module-array">
     <button @click="onClick">MC Test</button>
     <button @click="onClick">XHR</button>
-    <button @click="onClick">Drive</button>
+    <button @click="onDriveClick">Drive</button>
     <button @click="onClick">Power</button>
     <button @click="onClick">Science</button>
     <button @click="onClick">Settings</button>
@@ -15,23 +15,42 @@
 </template>
 
 <script>
-import SPA from './components/SPA.vue'
+import SPA from "./components/SPA.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: { SPA },
   data() {
     return {
-      mode: 'Home'
-    }
+      mode: "Home",
+    };
   },
   methods: {
+    async onDriveClick(e) {
+      console.log("Drive button clicked");
+        const rawResponse = await fetch("http://localhost:5000/drive", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            is_operational: 1,
+            drive_mode: "B",
+            speed: 20,
+            angle: 10,
+          }),
+        });
+        const content = await rawResponse.json();
+
+        console.log(content);
+    },
     onClick(e) {
-      this.mode = e.srcElement.innerText.replace(/ /g, '')
-      console.log(this.mode)
-    }
-  }
-}
+      this.mode = e.srcElement.innerText.replace(/ /g, "");
+      console.log(this.mode);
+    },
+  },
+};
 </script>
 
 <style>
