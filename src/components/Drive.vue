@@ -7,6 +7,7 @@ function connecthandler(e) {
 }
 
 function addgamepad(gamepad) {
+  if (window.pressed == 1){
   controllers[gamepad.index] = gamepad;
 
   var d = document.createElement("div");
@@ -51,6 +52,9 @@ function addgamepad(gamepad) {
 
   document.body.appendChild(d);
   requestAnimationFrame(updateStatus);
+}else{
+  console.log("not pressed");
+}
 }
 
 function disconnecthandler(e) {

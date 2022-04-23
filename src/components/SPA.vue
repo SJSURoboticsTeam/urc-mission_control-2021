@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Drive from './components/Drive.vue'
+import Drive from '../components/Drive.vue'
 import XHR from '../components/XHR.vue'
 import MCTest from '../components/MCTest.vue'
 
@@ -16,6 +16,7 @@ export default {
     components: { XHR, MCTest, Drive }
 }
 </script>
+
 
 <style scoped>
 img {

@@ -12,6 +12,7 @@
     <button @click="onClick">Science</button>
     <button @click="onClick">Settings</button>
   </div>
+  
 </template>
 
 <script>
@@ -25,32 +26,23 @@ export default {
       mode: "Home",
     };
   },
-  methods: {
-    async onDriveClick(e) {
-      console.log("Drive button clicked");
-        const rawResponse = await fetch("http://localhost:3000/drive", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            is_operational: 1,
-            drive_mode: "B",
-            speed: 20,
-            angle: 10,
-          }),
-        });
-        const content = await rawResponse.json();
-
-        console.log(content);
-    },
+      methods:{
+    onDriveClick(e){
+      this.mode = e.srcElement.innerText.replace(/ /g, "");
+      console.log(this.mode);
+      window.pressed = 1;
+      if(window.pressed){
+        console.log(window.pressed);
+      }else{
+        console.log("not pressed");
+      }
+    }
+  },
     onClick(e) {
       this.mode = e.srcElement.innerText.replace(/ /g, "");
       console.log(this.mode);
     },
-  },
-};
+  };
 </script>
 
 <style>
